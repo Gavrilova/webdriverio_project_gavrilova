@@ -10,9 +10,10 @@ class LoginPage extends Page {
     get inputUsername () { return $('#username') }
     get inputPassword () { return $('#password') }
     get btnSubmit () { return $('button[type="submit"]') }
+    get flashAlert() {return $('#flash')}
 
     /**
-     * a method to encapsule automation code to interact with the page
+     * a method to encapsulate automation code to interact with the page
      * e.g. to login using username and password
      */
     async login (username, password) {
@@ -22,7 +23,7 @@ class LoginPage extends Page {
     }
 
     /**
-     * overwrite specifc options to adapt it to page object
+     * overwrite specific options to adapt it to page object
      */
     open () {
         return super.open('login');
