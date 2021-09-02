@@ -24,12 +24,11 @@ class BasicAuthPage extends Page {
         let result;
         try {
             await browser.$(selector);
-            result = true;}
-        catch(error)
-            {
-                console.error(error);
-                result = false;
-            }
+            result = true;
+        } catch (error) {
+            console.error(error);
+            result = false;
+        }
         return result;
     }
 
@@ -37,18 +36,11 @@ class BasicAuthPage extends Page {
         return super.openBasicAuth(username, password, "basic_auth");
     }
 
-    async extracted(username, password) {
-        await BasicAuthPage.openBasicAuth(username, password);
-        if (!await BasicAuthPage.isDisplayed("div p")) {  //css selector $('div p')
-            if (!await BasicAuthPage.isDisplayed("..")) { //xPath $('//body') or $('..')
-                await browser.sendKeys(username);
-                await browser.keys("\uE004");
-                await browser.sendKeys(password);
-                await browser.keys("\uE007");
-                expect(browser.getUrl).toHaveUrlContaining(urlBasicAuth);
-                expect(BasicAuthPage.getNotAuthorized).toBeDisplayed();
-            }
-        }
+    async enterKeysToBasicAuthScheme(username, password) {
+        await browser.sendKeys(username);
+        await browser.keys("\uE004");
+        await browser.sendKeys(password);
+        await browser.keys("\uE007");
     }
 }
 
